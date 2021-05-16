@@ -28,4 +28,4 @@ This project is built in two parts
 * Go to http://localhost:4200 in the browser to visit the chat service
 
 ### Screen recording
-![alt text](screen_recording.mp4 "Screen recording")
+![alt text](screen_recording.gif "Screen recording")

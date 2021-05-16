@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend-service:
+    build: backend-service
+    ports:
+      - 8080:8080
+    networks:
+      - api-network
+  frontend-service:
+    build: frontend-service
+    ports:
+      - 4200:80
+    networks:
+      - api-network
+networks:
+  api-network:
+    driver: bridge

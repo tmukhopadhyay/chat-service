@@ -1,0 +1,33 @@
+.grid {
+  height: 100vh;
+  flex-direction: column;
+  align-content: center;
+}
+
+.mat-flat-button {
+  &.submit-button {
+    width: 100%;
+    padding: 7px 16px;
+    margin-top: 15px;
+  }
+}
+
+.mat-card-avatar {
+  .mat-icon {
+    font-size: 40px;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+
+  .mat-form-field-wrapper {
+    background-color: #fff;
+  }
+}
+
+.mat-card-header {
+  .mat-card-title {
+    color: #673ab7;
+  }
+}

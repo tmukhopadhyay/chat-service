@@ -1,0 +1,23 @@
+<div class="grid">
+  <mat-card class="col-4 col-md-5 col-sm-9 col-xs-11">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon color="primary">account_circle</mat-icon>
+      </div>
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-card-subtitle>Please sign in to start chatting</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="col-12">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput required formControlName="userName" autocomplete="off" />
+          <mat-icon matPrefix>edit</mat-icon>
+        </mat-form-field>
+        <button mat-flat-button class="submit-button" color="primary" type="submit" [disabled]="!loginForm.valid">
+          Sign In <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

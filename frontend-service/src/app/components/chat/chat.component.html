@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon color="primary">account_circle</mat-icon>
+    </div>
+    <mat-card-title>Chat Service</mat-card-title>
+    <button mat-flat-button color="warn" class="logout-button" (click)="logout()">Logout</button>
+  </mat-card-header>
+  <mat-card-content class="grid">
+    <div *ngFor="let message of messages" class="message-container col-7 col-sm-8 col-xs-9" [ngClass]="{'right-aligned' : message.name === userName}">
+      <p class="name">{{message.name === userName ? 'You' : message.name}}</p>
+      <p class="text">{{message.text}}</p>
+      <p class="date">{{message.date | date:'MMM d, y, h:mm a'}}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <form #form="ngForm" class="form chat-form grid" [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="col-11 col-md-10 col-xs-9">
+        <mat-label>Text message</mat-label>
+        <input type="text" matInput placeholder="Start typing..." formControlName="text" autocomplete="off" />
+      </mat-form-field>
+      <button mat-flat-button class="submit-button col-1 col-md-2 col-xs-3" color="primary" type="submit" [disabled]="!chatForm.valid">
+        Send
+      </button>
+    </form>
+  </mat-card-footer>
+</mat-card>

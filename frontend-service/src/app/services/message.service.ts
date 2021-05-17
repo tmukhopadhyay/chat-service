@@ -24,17 +24,8 @@ export class MessageService {
 
       _this.stompClient = Stomp.over(ws);
       _this.stompClient.connect({}, function() {
-        _this.stompClient.subscribe('/topic/messages', (message: any) => {
-          if (message.body) {
-            _this.appStore.addMessage(JSON.parse(message.body));
-          }
-        });
-
-        _this.stompClient.subscribe('/queue/errors', (message: any) => {
-          if (message.body) {
-            console.log('Error: ' + message.body);
-          }
-        });
+        _this.getMessages();
+        _this.handleErrors();
 
         return observer.next(true);
       }, function(err: any) {
@@ -43,6 +34,22 @@ export class MessageService {
       });
 
       observer.next(false);
+    });
+  }
+
+  private getMessages() {
+    this.stompClient.subscribe('/topic/messages', (message: any) => {
+      if (message.body) {
+        this.appStore.addMessage(JSON.parse(message.body));
+      }
+    });
+  }
+
+  private handleErrors() {
+    this.stompClient.subscribe('/queue/errors', (message: any) => {
+      if (message.body) {
+        console.log('Error: ' + message.body);
+      }
     });
   }
 

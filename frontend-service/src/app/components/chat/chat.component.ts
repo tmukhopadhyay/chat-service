@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AppStore } from '../../store';
 import { Message } from '../../models';
@@ -11,9 +12,11 @@ import { MessageService } from '../../services';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   @ViewChild('form', { static: false }) public form?: FormGroupDirective;
+
+  private messageSubscription?: Subscription;
 
   public userName: string | null;
   public messages: Array<Message> = [];
@@ -34,7 +37,7 @@ export class ChatComponent implements OnInit {
       this.redirectToSignIn();
     }
 
-    this.appStore.messages$.subscribe((messages: Array<Message>) => {
+    this.messageSubscription = this.appStore.messages$.subscribe((messages: Array<Message>) => {
       this.messages = messages;
     });
   }
@@ -52,5 +55,11 @@ export class ChatComponent implements OnInit {
   private redirectToSignIn() {
     sessionStorage.removeItem('userName');
     this.router.navigate(['/sign-in']);
+  }
+
+  public ngOnDestroy() {
+    if(this.messageSubscription) {
+      this.messageSubscription.unsubscribe();
+    }
   }
 }

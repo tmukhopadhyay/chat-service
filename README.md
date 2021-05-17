@@ -1,4 +1,4 @@
-# chat-service
+# Chat Service
 A simple chat service
 
 ### Technologies
